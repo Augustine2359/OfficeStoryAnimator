@@ -12,7 +12,7 @@ import Cocoa
 class PersonView: NSImageView {
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
-        image = #imageLiteral(resourceName: "person.png")
+        image = Bundle.main.image(forResource: "person.png")
     }
 
     required init?(coder: NSCoder) {
