@@ -13,8 +13,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
 
-
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        let controller = OfficeViewController(nibName: "OfficeView", bundle: Bundle.main)
+        window.contentView?.addSubview((controller?.view)!)
         // Insert code here to initialize your application
     }
 
