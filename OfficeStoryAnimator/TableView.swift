@@ -9,8 +9,10 @@
 import Foundation
 import Cocoa
 
-class OfficeView: NSView {
+class TableView: NSView {
     override func draw(_ dirtyRect: NSRect) {
-        layer?.backgroundColor = NSColor.white.cgColor
+        layer?.backgroundColor = NSColor.brown.cgColor
+        layer?.borderColor = NSColor.black.cgColor
+        layer?.borderWidth = 1
     }
 }

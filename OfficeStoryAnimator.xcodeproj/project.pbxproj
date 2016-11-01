@@ -13,6 +13,7 @@
 		3D88756B1DC8CBCC000E688C /* OfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D88756A1DC8CBCC000E688C /* OfficeViewController.swift */; };
 		3D88756D1DC8CC45000E688C /* OfficeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D88756C1DC8CC45000E688C /* OfficeView.xib */; };
 		3D88756F1DC8CE51000E688C /* OfficeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D88756E1DC8CE51000E688C /* OfficeView.swift */; };
+		3D8875711DC8CFAB000E688C /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8875701DC8CFAB000E688C /* TableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		3D88756A1DC8CBCC000E688C /* OfficeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfficeViewController.swift; sourceTree = "<group>"; };
 		3D88756C1DC8CC45000E688C /* OfficeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfficeView.xib; sourceTree = "<group>"; };
 		3D88756E1DC8CE51000E688C /* OfficeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfficeView.swift; sourceTree = "<group>"; };
+		3D8875701DC8CFAB000E688C /* TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				3D8875531DC8C68C000E688C /* AppDelegate.swift */,
 				3D88756C1DC8CC45000E688C /* OfficeView.xib */,
 				3D88756A1DC8CBCC000E688C /* OfficeViewController.swift */,
+				3D8875701DC8CFAB000E688C /* TableView.swift */,
 				3D88756E1DC8CE51000E688C /* OfficeView.swift */,
 				3D8875551DC8C68C000E688C /* Assets.xcassets */,
 				3D8875571DC8C68C000E688C /* MainMenu.xib */,
@@ -140,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D88756B1DC8CBCC000E688C /* OfficeViewController.swift in Sources */,
+				3D8875711DC8CFAB000E688C /* TableView.swift in Sources */,
 				3D88756F1DC8CE51000E688C /* OfficeView.swift in Sources */,
 				3D8875541DC8C68C000E688C /* AppDelegate.swift in Sources */,
 			);
