@@ -23,10 +23,20 @@ class OfficeViewController: NSViewController {
         scrollView.hasHorizontalScroller = true
         view.addSubview(scrollView)
 
-        let tableGroup1Rects: [NSRect] = groupOfTableRectsFromXAndY(x: tableGroup1x, y: tableGroup1y)
-
+        let tableGroup1Rects = groupOfTableRectsFromXAndY(x: tableGroup1x, y: tableGroup1y)
+        let tableGroup2Rects = groupOfTableRectsFromXAndY(x: tableGroup1x + 400, y: tableGroup1y)
+        let tableGroup3Rects = groupOfTableRectsFromXAndY(x: tableGroup1x + 800, y: tableGroup1y)
+        
         let subView = NSView(frame: NSRect(x: 0, y: 0, width: 1500, height: 1500))
         for rect in tableGroup1Rects {
+            let tableView = TableView(frame: rect)
+            subView.addSubview(tableView)
+        }
+        for rect in tableGroup2Rects {
+            let tableView = TableView(frame: rect)
+            subView.addSubview(tableView)
+        }
+        for rect in tableGroup3Rects {
             let tableView = TableView(frame: rect)
             subView.addSubview(tableView)
         }
