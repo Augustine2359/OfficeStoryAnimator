@@ -16,6 +16,7 @@
 		3D8875711DC8CFAB000E688C /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8875701DC8CFAB000E688C /* TableView.swift */; };
 		3D8875731DC8D087000E688C /* PersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8875721DC8D087000E688C /* PersonView.swift */; };
 		3D8875751DC8D805000E688C /* person.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D8875741DC8D805000E688C /* person.png */; };
+		3D8875771DCCE3C7000E688C /* vip.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D8875761DCCE3C7000E688C /* vip.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		3D8875701DC8CFAB000E688C /* TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		3D8875721DC8D087000E688C /* PersonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonView.swift; sourceTree = "<group>"; };
 		3D8875741DC8D805000E688C /* person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = person.png; sourceTree = "<group>"; };
+		3D8875761DCCE3C7000E688C /* vip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vip.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				3D88756E1DC8CE51000E688C /* OfficeView.swift */,
 				3D8875721DC8D087000E688C /* PersonView.swift */,
 				3D8875741DC8D805000E688C /* person.png */,
+				3D8875761DCCE3C7000E688C /* vip.png */,
 				3D8875551DC8C68C000E688C /* Assets.xcassets */,
 				3D8875571DC8C68C000E688C /* MainMenu.xib */,
 				3D88755A1DC8C68C000E688C /* Info.plist */,
@@ -137,6 +140,7 @@
 			files = (
 				3D8875751DC8D805000E688C /* person.png in Resources */,
 				3D8875561DC8C68C000E688C /* Assets.xcassets in Resources */,
+				3D8875771DCCE3C7000E688C /* vip.png in Resources */,
 				3D88756D1DC8CC45000E688C /* OfficeView.xib in Resources */,
 				3D8875591DC8C68C000E688C /* MainMenu.xib in Resources */,
 			);
