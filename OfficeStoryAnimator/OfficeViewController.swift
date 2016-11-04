@@ -13,7 +13,14 @@ class OfficeViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let personView = PersonView(frame: NSRect(x: 0, y: 0, width: 100, height: 100))
-        view.addSubview(personView)
+        let scrollView = NSScrollView(frame: NSRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        scrollView.autoresizingMask = [.viewHeightSizable, .viewWidthSizable]
+        scrollView.hasHorizontalScroller = true
+        view.addSubview(scrollView)
+
+        let subview = NSView(frame: NSRect(x: 0, y: 0, width: 1500, height: 100))
+        let personView = PersonView(frame: NSRect(x: 1000, y: 0, width: 100, height: 100))
+        subview.addSubview(personView)
+        scrollView.documentView = subview
     }
 }
