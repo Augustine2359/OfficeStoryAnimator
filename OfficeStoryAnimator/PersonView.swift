@@ -10,16 +10,13 @@ import Foundation
 import Cocoa
 
 class PersonView: NSImageView {
-    var direction: Float
-    
-    init(frame frameRect: NSRect, direction: Float, isVIP: Bool) {
-        self.direction = direction
+    init(frame frameRect: NSRect, direction: CGFloat, isVIP: Bool) {
         super.init(frame: frameRect)
         image = isVIP ? Bundle.main.image(forResource: "vip.png") : Bundle.main.image(forResource: "person.png")
+        self.rotate(byDegrees: direction)
     }
     
     override init(frame frameRect: NSRect) {
-        self.direction = 0
         super.init(frame: frameRect)
         image = Bundle.main.image(forResource: "person.png")
     }

@@ -18,6 +18,9 @@ class OfficeViewController: NSViewController {
     let standardPersonWidth: Double = 75
     let standardPersonHeight: Double = 75
 
+    let facingLeftAngle:CGFloat = 180
+    let facingDownAngle:CGFloat = -90
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,7 +32,7 @@ class OfficeViewController: NSViewController {
         let tableGroup1Rects = groupOfTableRectsFromXAndY(x: tableGroup1x, y: tableGroup1y)
         let tableGroup2Rects = groupOfTableRectsFromXAndY(x: tableGroup1x + 400, y: tableGroup1y)
         let tableGroup3Rects = groupOfTableRectsFromXAndY(x: tableGroup1x + 800, y: tableGroup1y)
-        
+
         let subView = NSView(frame: NSRect(x: 0, y: 0, width: 1500, height: 1500))
         for rect in tableGroup1Rects {
             let tableView = TableView(frame: rect)
@@ -44,7 +47,17 @@ class OfficeViewController: NSViewController {
             subView.addSubview(tableView)
         }
 
-        let persons = personViews(fromX: 25, y: tableGroup1y)
+        var persons = personViews(fromX: 25, y: tableGroup1y)
+        for personView in persons {
+            subView.addSubview(personView)
+        }
+
+        persons = personViews(fromX: 425, y: tableGroup1y)
+        for personView in persons {
+            subView.addSubview(personView)
+        }
+
+        persons = personViews(fromX: 825, y: tableGroup1y)
         for personView in persons {
             subView.addSubview(personView)
         }
@@ -90,23 +103,23 @@ class OfficeViewController: NSViewController {
 
         personViewRect.origin.y += CGFloat(standardPersonHeight*2)
         personViewRect.origin.x += CGFloat(standardPersonWidth + standardTableWidth/2)
-        personViews.append(PersonView(frame: personViewRect, direction: 0, isVIP: false))
+        personViews.append(PersonView(frame: personViewRect, direction: facingDownAngle, isVIP: false))
         
         personViewRect.origin.y -= CGFloat(standardPersonHeight*2)
         personViewRect.origin.x += CGFloat(standardPersonWidth + standardTableWidth/2)
-        personViews.append(PersonView(frame: personViewRect, direction: 0, isVIP: false))
+        personViews.append(PersonView(frame: personViewRect, direction: facingLeftAngle, isVIP: false))
         
         personViewRect.origin.y -= CGFloat(standardPersonHeight)
-        personViews.append(PersonView(frame: personViewRect, direction: 0, isVIP: false))
+        personViews.append(PersonView(frame: personViewRect, direction: facingLeftAngle, isVIP: false))
 
         personViewRect.origin.y -= CGFloat(standardPersonHeight)
-        personViews.append(PersonView(frame: personViewRect, direction: 0, isVIP: false))
+        personViews.append(PersonView(frame: personViewRect, direction: facingLeftAngle, isVIP: false))
 
         personViewRect.origin.y -= CGFloat(standardPersonHeight)
-        personViews.append(PersonView(frame: personViewRect, direction: 0, isVIP: false))
+        personViews.append(PersonView(frame: personViewRect, direction: facingLeftAngle, isVIP: false))
 
         personViewRect.origin.y -= CGFloat(standardPersonHeight)
-        personViews.append(PersonView(frame: personViewRect, direction: 0, isVIP: false))
+        personViews.append(PersonView(frame: personViewRect, direction: facingLeftAngle, isVIP: false))
 
         return personViews
     }
