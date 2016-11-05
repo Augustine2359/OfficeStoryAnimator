@@ -11,7 +11,7 @@ import Cocoa
 
 class OfficeViewController: NSViewController {
     let tableGroup1x: Double = 100
-    let tableGroup1y: Double = 100
+    let tableGroup1y: Double = 200
     let standardTableWidth: Double = 75
     let standardTableHeight: Double = 75
 
@@ -20,6 +20,10 @@ class OfficeViewController: NSViewController {
 
     let facingLeftAngle:CGFloat = 180
     let facingDownAngle:CGFloat = -90
+
+    var mePerson: PersonView?
+    var deptHeadPerson: PersonView?
+    var pmPerson: PersonView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,17 +51,17 @@ class OfficeViewController: NSViewController {
             subView.addSubview(tableView)
         }
 
-        var persons = personViews(fromX: 25, y: tableGroup1y)
+        var persons = personViews(fromX: 25, y: tableGroup1y, hasVIPs: false)
         for personView in persons {
             subView.addSubview(personView)
         }
 
-        persons = personViews(fromX: 425, y: tableGroup1y)
+        persons = personViews(fromX: 425, y: tableGroup1y, hasVIPs: true)
         for personView in persons {
             subView.addSubview(personView)
         }
 
-        persons = personViews(fromX: 825, y: tableGroup1y)
+        persons = personViews(fromX: 825, y: tableGroup1y, hasVIPs: false)
         for personView in persons {
             subView.addSubview(personView)
         }
@@ -82,7 +86,7 @@ class OfficeViewController: NSViewController {
         return tableGroupRects
     }
     
-    func personViews(fromX x:Double, y:Double) -> [PersonView] {
+    func personViews(fromX x:Double, y:Double, hasVIPs:Bool) -> [PersonView] {
         var personViews: [PersonView] = []
         
         var personViewRect = NSRect(x: x, y: y, width: standardPersonWidth, height: standardPersonHeight)
@@ -93,7 +97,13 @@ class OfficeViewController: NSViewController {
         personViews.append(PersonView(frame: personViewRect, direction: 0, isVIP: false))
 
         personViewRect.origin.y += CGFloat(standardPersonHeight)
-        personViews.append(PersonView(frame: personViewRect, direction: 0, isVIP: false))
+        if (hasVIPs) {
+            mePerson = PersonView(frame: personViewRect, direction: 0, isVIP: true)
+            personViews.append(mePerson!)
+        }
+        else {
+            personViews.append(PersonView(frame: personViewRect, direction: 0, isVIP: false))
+        }
 
         personViewRect.origin.y += CGFloat(standardPersonHeight)
         personViews.append(PersonView(frame: personViewRect, direction: 0, isVIP: false))
@@ -103,14 +113,26 @@ class OfficeViewController: NSViewController {
 
         personViewRect.origin.y += CGFloat(standardPersonHeight*2)
         personViewRect.origin.x += CGFloat(standardPersonWidth + standardTableWidth/2)
-        personViews.append(PersonView(frame: personViewRect, direction: facingDownAngle, isVIP: false))
+        if (hasVIPs) {
+            deptHeadPerson = PersonView(frame: personViewRect, direction: facingDownAngle, isVIP: true)
+            personViews.append(deptHeadPerson!)
+        }
+        else {
+            personViews.append(PersonView(frame: personViewRect, direction: facingDownAngle, isVIP: false))
+        }
         
         personViewRect.origin.y -= CGFloat(standardPersonHeight*2)
         personViewRect.origin.x += CGFloat(standardPersonWidth + standardTableWidth/2)
         personViews.append(PersonView(frame: personViewRect, direction: facingLeftAngle, isVIP: false))
         
         personViewRect.origin.y -= CGFloat(standardPersonHeight)
-        personViews.append(PersonView(frame: personViewRect, direction: facingLeftAngle, isVIP: false))
+        if (hasVIPs) {
+            pmPerson = PersonView(frame: personViewRect, direction: facingLeftAngle, isVIP: true)
+            personViews.append(pmPerson!)
+        }
+        else {
+            personViews.append(PersonView(frame: personViewRect, direction: facingLeftAngle, isVIP: false))
+        }
 
         personViewRect.origin.y -= CGFloat(standardPersonHeight)
         personViews.append(PersonView(frame: personViewRect, direction: facingLeftAngle, isVIP: false))
