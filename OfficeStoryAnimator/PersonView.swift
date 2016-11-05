@@ -32,7 +32,12 @@ class PersonView: NSImageView {
         if (x < 0 && y < 0) {
             finalAngle += 180
         }
-        //animate this turning
-        frameCenterRotation = finalAngle// - frameCenterRotation
+
+        NSAnimationContext.beginGrouping()
+        NSAnimationContext.current().duration = 1
+
+        animator().frameCenterRotation = finalAngle
+
+        NSAnimationContext.endGrouping()
     }
 }
