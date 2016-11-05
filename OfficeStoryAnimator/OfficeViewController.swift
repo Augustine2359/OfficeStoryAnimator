@@ -65,10 +65,14 @@ class OfficeViewController: NSViewController {
         for personView in persons {
             subView.addSubview(personView)
         }
-
+        
         scrollView.documentView = subView
+        
+//        let textView = CustomTextView(frame: NSRect(x: 0, y: 100, width: 100, height: 100))
+//        textView.string = "hello"
+//        subView.addSubview(textView)
     }
-  
+
     func groupOfTableRectsFromXAndY(x:Double, y:Double) -> [NSRect] {
         var tableGroupRects: [NSRect] = []
         tableGroupRects.append(NSRect(x: x, y: y, width: standardTableWidth, height: standardTableHeight))

@@ -17,6 +17,7 @@
 		3D8875731DC8D087000E688C /* PersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8875721DC8D087000E688C /* PersonView.swift */; };
 		3D8875751DC8D805000E688C /* person.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D8875741DC8D805000E688C /* person.png */; };
 		3D8875771DCCE3C7000E688C /* vip.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D8875761DCCE3C7000E688C /* vip.png */; };
+		3DA63D951DCE424600B10018 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA63D941DCE424600B10018 /* CustomTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		3D8875721DC8D087000E688C /* PersonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonView.swift; sourceTree = "<group>"; };
 		3D8875741DC8D805000E688C /* person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = person.png; sourceTree = "<group>"; };
 		3D8875761DCCE3C7000E688C /* vip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vip.png; sourceTree = "<group>"; };
+		3DA63D941DCE424600B10018 /* CustomTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				3D8875531DC8C68C000E688C /* AppDelegate.swift */,
 				3D88756C1DC8CC45000E688C /* OfficeView.xib */,
 				3D88756A1DC8CBCC000E688C /* OfficeViewController.swift */,
+				3DA63D941DCE424600B10018 /* CustomTextView.swift */,
 				3D8875701DC8CFAB000E688C /* TableView.swift */,
 				3D88756E1DC8CE51000E688C /* OfficeView.swift */,
 				3D8875721DC8D087000E688C /* PersonView.swift */,
@@ -155,6 +158,7 @@
 			files = (
 				3D8875731DC8D087000E688C /* PersonView.swift in Sources */,
 				3D88756B1DC8CBCC000E688C /* OfficeViewController.swift in Sources */,
+				3DA63D951DCE424600B10018 /* CustomTextView.swift in Sources */,
 				3D8875711DC8CFAB000E688C /* TableView.swift in Sources */,
 				3D88756F1DC8CE51000E688C /* OfficeView.swift in Sources */,
 				3D8875541DC8C68C000E688C /* AppDelegate.swift in Sources */,
@@ -310,6 +314,7 @@
 				3D88755F1DC8C68C000E688C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
