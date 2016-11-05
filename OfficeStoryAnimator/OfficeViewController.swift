@@ -73,6 +73,33 @@ class OfficeViewController: NSViewController {
 //        subView.addSubview(textView)
     }
 
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        
+        mePerson?.turnTo(otherPerson: deptHeadPerson!)
+        pmPerson?.turnTo(otherPerson: mePerson!)
+        deptHeadPerson?.turnTo(otherPerson: pmPerson!)
+        return
+        
+        let basicAnimation = CABasicAnimation(keyPath: "position")
+        basicAnimation.fromValue = NSValue(point: mePerson!.frame.origin)
+        basicAnimation.toValue = NSValue(point: NSPoint(x:0, y:0))
+        basicAnimation.duration = 1
+        mePerson!.frame = NSRect(x: 0, y: 0, width: 100, height: 100)
+        mePerson!.layer?.add(basicAnimation, forKey: "position")
+        return
+        
+        let animation: NSViewAnimation = NSViewAnimation()
+        Swift.print(mePerson)
+        let dictionary = [NSViewAnimationTargetKey: mePerson,
+                          NSViewAnimationStartFrameKey: NSValue(rect: (mePerson!.frame)),
+                          NSViewAnimationEndFrameKey: NSValue(rect: NSRect(x:0, y:0, width: 100, height:100))] as [String : Any]
+        animation.viewAnimations.append(dictionary)
+        animation.start()
+        //        animation.viewAnimations.append(<#T##newElement: Element##Element#>)
+        //        let animation = NSViewAnimation(viewAnimations: <#T##[[String : Any]]#>)
+    }
+    
     func groupOfTableRectsFromXAndY(x:Double, y:Double) -> [NSRect] {
         var tableGroupRects: [NSRect] = []
         tableGroupRects.append(NSRect(x: x, y: y, width: standardTableWidth, height: standardTableHeight))
