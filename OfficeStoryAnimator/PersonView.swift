@@ -25,7 +25,7 @@ class PersonView: NSImageView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func turnTo(otherPerson: PersonView) {
+    func turnTo(otherPerson: PersonView, completionHandler: @escaping (()->Void)) {
         let y = otherPerson.frame.midY - frame.midY
         let x = otherPerson.frame.midX - frame.midX
         var finalAngle = atan(y/x) / CGFloat(M_PI) * 180
@@ -33,11 +33,22 @@ class PersonView: NSImageView {
             finalAngle += 180
         }
 
+        turnTo(angle: finalAngle, completionHandler: completionHandler)
+    }
+    
+    func turnTo(angle: CGFloat, completionHandler: @escaping (()->Void)) {
+        Swift.print("initial frame is ")
+        Swift.print(frame)
         NSAnimationContext.beginGrouping()
-        NSAnimationContext.current().duration = 1
-
-        animator().frameCenterRotation = finalAngle
-
+        NSAnimationContext.current().duration = 0.5
+        NSAnimationContext.current().completionHandler = {
+            Swift.print("final frame is ")
+            Swift.print(self.frame)
+            Swift.print("animator frame is ")
+            Swift.print(self.animator().frame)
+            completionHandler()
+        }
+        animator().frameCenterRotation = angle
         NSAnimationContext.endGrouping()
     }
 }

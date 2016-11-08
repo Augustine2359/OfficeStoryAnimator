@@ -18,13 +18,17 @@ class OfficeViewController: NSViewController {
     let standardPersonWidth: Double = 75
     let standardPersonHeight: Double = 75
 
+    let facingUpAngle:CGFloat = 90
     let facingLeftAngle:CGFloat = 180
     let facingDownAngle:CGFloat = -90
-
+    let facingRightAngle:CGFloat = 0
+    
     var mePerson: PersonView?
     var deptHeadPerson: PersonView?
     var pmPerson: PersonView?
 
+    var animationCommands: [Any] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -68,37 +72,76 @@ class OfficeViewController: NSViewController {
         
         scrollView.documentView = subView
         
-//        let textView = CustomTextView(frame: NSRect(x: 0, y: 100, width: 100, height: 100))
-//        textView.string = "hello"
-//        subView.addSubview(textView)
+        var rotateToPersonTuple = (turningPersonView: pmPerson!, targetPersonView: mePerson!)
+        animationCommands.append(rotateToPersonTuple)
+        var rotateToAngleTuple = (personView: pmPerson!, rotation: facingLeftAngle)
+        animationCommands.append(rotateToAngleTuple)
+        var translateTuple = (personView: mePerson!, translation: NSPoint(x: -100, y: 0))
+        animationCommands.append(translateTuple)
+        rotateToAngleTuple = (personView: mePerson!, rotation: facingUpAngle)
+        animationCommands.append(rotateToAngleTuple)
+        translateTuple = (personView: mePerson!, translation: NSPoint(x: 0, y: 325))
+        animationCommands.append(translateTuple)
+        rotateToAngleTuple = (personView: mePerson!, rotation: facingRightAngle)
+        animationCommands.append(rotateToAngleTuple)
+        translateTuple = (personView: mePerson!, translation: NSPoint(x: 400, y: 0))
+        animationCommands.append(translateTuple)
+        rotateToAngleTuple = (personView: mePerson!, rotation: facingDownAngle)
+        animationCommands.append(rotateToAngleTuple)
+        translateTuple = (personView: mePerson!, translation: NSPoint(x: 0, y: -200))
+        animationCommands.append(translateTuple)
+        rotateToPersonTuple = (turningPersonView: mePerson!, targetPersonView: pmPerson!)
+        animationCommands.append(rotateToPersonTuple)
     }
 
+    func executeAnimationCommands() {
+        if (animationCommands.count == 0) {
+            return
+        }
+
+        let superself = self
+        
+        let animationCommand = animationCommands.removeFirst()
+        if let rotateCommand = animationCommand as? (turningPersonView: PersonView, targetPersonView: PersonView) {
+            Swift.print("rotating to person")
+            rotateCommand.turningPersonView.turnTo(otherPerson: rotateCommand.targetPersonView, completionHandler: { 
+                self.executeAnimationCommands()
+            })
+            return
+        }
+
+        if let translateCommand = animationCommand as? (personView: PersonView, translation: NSPoint) {
+            Swift.print("moving")
+            let animation = NSViewAnimation(duration: 0.5, animationCurve: NSAnimationCurve.linear)
+            var newFrame = translateCommand.personView.frame
+            newFrame.origin.x += translateCommand.translation.x
+            newFrame.origin.y += translateCommand.translation.y
+            let dictionary = [NSViewAnimationTargetKey: translateCommand.0,
+                              NSViewAnimationStartFrameKey: NSValue(rect: translateCommand.personView.frame),
+                              NSViewAnimationEndFrameKey: NSValue(rect: newFrame)]
+            animation.viewAnimations.append(dictionary)
+            animation.delegate = superself
+            animation.start()
+            return
+        }
+        
+        if let rotateCommand = animationCommand as? (personView: PersonView, rotation: CGFloat) {
+            Swift.print("looking at something")
+            rotateCommand.personView.turnTo(angle: rotateCommand.rotation, completionHandler: {
+                self.executeAnimationCommands()
+            })
+            return
+        }
+    }
+    
     override func viewDidAppear() {
         super.viewDidAppear()
-        
-        mePerson?.turnTo(otherPerson: deptHeadPerson!)
-        pmPerson?.turnTo(otherPerson: mePerson!)
-        deptHeadPerson?.turnTo(otherPerson: pmPerson!)
-        return
-        
-        let basicAnimation = CABasicAnimation(keyPath: "position")
-        basicAnimation.fromValue = NSValue(point: mePerson!.frame.origin)
-        basicAnimation.toValue = NSValue(point: NSPoint(x:0, y:0))
-        basicAnimation.duration = 1
-        mePerson!.frame = NSRect(x: 0, y: 0, width: 100, height: 100)
-        mePerson!.layer?.add(basicAnimation, forKey: "position")
-        return
-        
-        let animation: NSViewAnimation = NSViewAnimation()
-        Swift.print(mePerson)
-        let dictionary = [NSViewAnimationTargetKey: mePerson,
-                          NSViewAnimationStartFrameKey: NSValue(rect: (mePerson!.frame)),
-                          NSViewAnimationEndFrameKey: NSValue(rect: NSRect(x:0, y:0, width: 100, height:100))] as [String : Any]
-        animation.viewAnimations.append(dictionary)
-        animation.start()
-        //        animation.viewAnimations.append(<#T##newElement: Element##Element#>)
-        //        let animation = NSViewAnimation(viewAnimations: <#T##[[String : Any]]#>)
+
+        executeAnimationCommands()
+
+        return        
     }
+    
     
     func groupOfTableRectsFromXAndY(x:Double, y:Double) -> [NSRect] {
         var tableGroupRects: [NSRect] = []
@@ -176,5 +219,10 @@ class OfficeViewController: NSViewController {
 
         return personViews
     }
-    
+}
+
+extension OfficeViewController: NSAnimationDelegate {
+    func animationDidEnd(_ animation: NSAnimation) {
+        executeAnimationCommands()
+    }
 }
