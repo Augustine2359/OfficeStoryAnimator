@@ -12,11 +12,17 @@ import Cocoa
 class CustomTextView: NSTextView {
     init(speaker: PersonView, text: String) {
         var frame = speaker.frame
-        frame.origin.x += 100
-        frame.origin.y += 100
+        frame.size.width *= 2
+        frame.origin.x += 50
         super.init(frame: frame)
-        font = NSFont(name: font!.fontName, size: 15)
+        font = NSFont(name: font!.fontName, size: 20)
         string = text
+
+        layoutManager?.ensureLayout(for: textContainer!)
+        let usedRect = layoutManager?.usedRect(for: textContainer!)
+        frame.size.width = usedRect!.width
+        frame.size.height = usedRect!.height
+        self.frame = frame
     }
 
     override init(frame frameRect: NSRect) {
