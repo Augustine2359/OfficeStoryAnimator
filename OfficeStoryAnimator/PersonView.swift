@@ -38,7 +38,7 @@ class PersonView: NSView {
         let y = otherPerson.frame.midY - frame.midY
         let x = otherPerson.frame.midX - frame.midX
         var finalAngle = atan(y/x) / CGFloat(M_PI) * 180
-        if (x < 0 && y < 0) {
+        if (x < 0) {
             finalAngle += 180
         }
 
