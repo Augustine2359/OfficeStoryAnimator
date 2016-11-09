@@ -74,6 +74,10 @@ class OfficeViewController: NSViewController {
         
         var rotateToPersonTuple = (turningPersonView: pmPerson!, targetPersonView: mePerson!)
         animationCommands.append(rotateToPersonTuple)
+        var textTuple = (speaker: pmPerson!, text: "Hey could you come here for a while?")
+        animationCommands.append(textTuple)
+        textTuple = (speaker: pmPerson!, text: "I need to consult you on something")
+        animationCommands.append(textTuple)
         var rotateToAngleTuple = (personView: pmPerson!, rotation: facingLeftAngle)
         animationCommands.append(rotateToAngleTuple)
         var translateTuple = (personView: mePerson!, translation: NSPoint(x: -100, y: 0))
@@ -92,6 +96,24 @@ class OfficeViewController: NSViewController {
         animationCommands.append(translateTuple)
         rotateToPersonTuple = (turningPersonView: mePerson!, targetPersonView: pmPerson!)
         animationCommands.append(rotateToPersonTuple)
+        textTuple = (speaker: mePerson!, text: "Blah blah")
+        animationCommands.append(textTuple)
+        textTuple = (speaker: pmPerson!, text: "Blah blah")
+        animationCommands.append(textTuple)
+        textTuple = (speaker: pmPerson!, text: "By the way, next time don't walk behind the department head")
+        animationCommands.append(textTuple)
+        rotateToPersonTuple = (turningPersonView: mePerson!, targetPersonView: deptHeadPerson!)
+        animationCommands.append(rotateToPersonTuple)
+        rotateToPersonTuple = (turningPersonView: mePerson!, targetPersonView: pmPerson!)
+        animationCommands.append(rotateToPersonTuple)
+        rotateToPersonTuple = (turningPersonView: mePerson!, targetPersonView: deptHeadPerson!)
+        animationCommands.append(rotateToPersonTuple)
+        rotateToPersonTuple = (turningPersonView: mePerson!, targetPersonView: pmPerson!)
+        animationCommands.append(rotateToPersonTuple)
+        textTuple = (speaker: mePerson!, text: "...")
+        animationCommands.append(textTuple)
+        textTuple = (speaker: mePerson!, text: "Ok")
+        animationCommands.append(textTuple)
     }
 
     func executeAnimationCommands() {
@@ -100,8 +122,18 @@ class OfficeViewController: NSViewController {
         }
 
         let superself = self
-        
+
         let animationCommand = animationCommands.removeFirst()
+        if let textCommand = animationCommand as? (speaker: PersonView, text: String) {
+            let textView = CustomTextView(speaker: textCommand.speaker, text: textCommand.text)
+            view.addSubview(textView)
+            Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { (timer) in
+                textView.removeFromSuperview()
+                self.executeAnimationCommands()
+            })
+            return
+        }
+
         if let rotateCommand = animationCommand as? (turningPersonView: PersonView, targetPersonView: PersonView) {
             Swift.print("rotating to person")
             rotateCommand.turningPersonView.turnTo(otherPerson: rotateCommand.targetPersonView, completionHandler: { 
