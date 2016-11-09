@@ -9,16 +9,25 @@
 import Foundation
 import Cocoa
 
-class PersonView: NSImageView {
+class PersonView: NSView {
+    var completionHandler: (()->Void)?
+    var imageView: NSImageView
+
     init(frame frameRect: NSRect, direction: CGFloat, isVIP: Bool) {
+        imageView = NSImageView(frame: NSRect(x: 0, y: 0, width: frameRect.width, height: frameRect.height))
+        imageView.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
+        imageView.image = isVIP ? Bundle.main.image(forResource: "vip.png") : Bundle.main.image(forResource: "person.png")
         super.init(frame: frameRect)
-        image = isVIP ? Bundle.main.image(forResource: "vip.png") : Bundle.main.image(forResource: "person.png")
-        frameCenterRotation = direction
+        addSubview(imageView)
+        imageView.frameCenterRotation = direction
     }
     
     override init(frame frameRect: NSRect) {
+        imageView = NSImageView(frame: NSRect(x: 0, y: 0, width: frameRect.width, height: frameRect.height))
+        imageView.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
+        imageView.image = Bundle.main.image(forResource: "person.png")
         super.init(frame: frameRect)
-        image = Bundle.main.image(forResource: "person.png")
+        addSubview(imageView)
     }
 
     required init?(coder: NSCoder) {
@@ -37,18 +46,10 @@ class PersonView: NSImageView {
     }
     
     func turnTo(angle: CGFloat, completionHandler: @escaping (()->Void)) {
-        Swift.print("initial frame is ")
-        Swift.print(frame)
         NSAnimationContext.beginGrouping()
         NSAnimationContext.current().duration = 0.5
-        NSAnimationContext.current().completionHandler = {
-            Swift.print("final frame is ")
-            Swift.print(self.frame)
-            Swift.print("animator frame is ")
-            Swift.print(self.animator().frame)
-            completionHandler()
-        }
-        animator().frameCenterRotation = angle
+        NSAnimationContext.current().completionHandler = completionHandler
+        imageView.animator().frameCenterRotation = angle
         NSAnimationContext.endGrouping()
     }
 }
