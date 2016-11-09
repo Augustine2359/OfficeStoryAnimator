@@ -47,9 +47,14 @@ class PersonView: NSView {
     
     func turnTo(angle: CGFloat, completionHandler: @escaping (()->Void)) {
         NSAnimationContext.beginGrouping()
-        NSAnimationContext.current().duration = 0.5
+        NSAnimationContext.current().duration = 0.2
         NSAnimationContext.current().completionHandler = completionHandler
         imageView.animator().frameCenterRotation = angle
         NSAnimationContext.endGrouping()
+    }
+
+    override func draw(_ dirtyRect: NSRect) {
+        layer?.masksToBounds = false
+        super.draw(dirtyRect)
     }
 }
