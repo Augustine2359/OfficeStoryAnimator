@@ -58,11 +58,11 @@ class OfficeViewController: NSViewController {
 
         scrollView?.documentView = subView
 
-        ghostMePerson = PersonView(frame: NSRect(x: 50, y: 310, width: 500, height: 500), direction: facingRightAngle, isVIP: true)
+        ghostMePerson = PersonView(frame: NSRect(x: 50, y: 310, width: 5000, height: 500), direction: facingRightAngle, isVIP: true)
         ghostMePerson?.alphaValue = 0
         subView.addSubview(ghostMePerson!)
 
-        var waitDuration:Double = 10
+        let waitDuration:Double = 10
         animationCommands.append(waitDuration)
 
         var textTuple = (speaker: jankenPeople[2], text: "Ok guys, we need to decide who has to stay back today.")
@@ -107,13 +107,13 @@ class OfficeViewController: NSViewController {
         textTuple = (speaker: jankenPeople[5], text: "Yup.")
         animationCommands.append(textTuple)
 
-        textTuple = (speaker: ghostMePerson!, text: "O YA PE YA SONG.")
+        textTuple = (speaker: ghostMePerson!, text: "O YA PE YA SONG!")
         animationCommands.append(textTuple)
 
         jankenTuple = (player: mePerson!, symbol: -1)
         animationCommands.append(jankenTuple)
 
-        textTuple = (speaker: ghostMePerson!, text: "O YA PE YA SONG.")
+        textTuple = (speaker: ghostMePerson!, text: "O YA PE YA SONG!")
         animationCommands.append(textTuple)
 
         jankenTuple = (player: mePerson!, symbol: -2)
