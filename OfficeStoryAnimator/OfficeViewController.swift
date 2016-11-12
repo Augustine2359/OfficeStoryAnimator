@@ -53,11 +53,57 @@ class OfficeViewController: NSViewController {
         let subView = NSView(frame: NSRect(x: 0, y: 0, width: 1500, height: 1500))
 
         for personView in jankenPeople {
-            personView.showJanken(symbol: .Stone)
             subView.addSubview(personView)
         }
 
         scrollView?.documentView = subView
+
+        var textTuple = (speaker: jankenPeople[2], text: "Ok guys, we need to decide who has to stay back today.")
+        animationCommands.append(textTuple)
+        textTuple = (speaker: jankenPeople[6], text: "Let's decide using janken.")
+        animationCommands.append(textTuple)
+
+        textTuple = (speaker: mePerson!, text: "JAN KEN PON")
+        animationCommands.append(textTuple)
+
+        var jankenTuple = (player: mePerson!, symbol: 0)
+        animationCommands.append(jankenTuple)
+        textTuple = (speaker: jankenPeople[3], text: "Let's try again.")
+        animationCommands.append(textTuple)
+
+        textTuple = (speaker: mePerson!, text: "JAN KEN PON")
+        animationCommands.append(textTuple)
+
+        jankenTuple = (player: mePerson!, symbol: 1)
+        animationCommands.append(jankenTuple)
+        textTuple = (speaker: jankenPeople[7], text: "Still can't decide.")
+        animationCommands.append(textTuple)
+
+        textTuple = (speaker: mePerson!, text: "JAN KEN PON")
+        animationCommands.append(textTuple)
+
+        jankenTuple = (player: mePerson!, symbol: 2)
+        animationCommands.append(jankenTuple)
+
+        textTuple = (speaker: mePerson!, text: "Oh I have a suggestion. We have another way to do it in my country.")
+        animationCommands.append(textTuple)
+
+        textTuple = (speaker: mePerson!, text: "2 minutes later.")
+        animationCommands.append(textTuple)
+
+        textTuple = (speaker: mePerson!, text: "O YA PE YA SONG.")
+        animationCommands.append(textTuple)
+
+        jankenTuple = (player: mePerson!, symbol: -1)
+        animationCommands.append(jankenTuple)
+
+        textTuple = (speaker: mePerson!, text: "O YA PE YA SONG.")
+        animationCommands.append(textTuple)
+
+        jankenTuple = (player: mePerson!, symbol: -2)
+        animationCommands.append(jankenTuple)
+
+        animationCommands.append("all turn")
     }
 
     func officeStoryViewsAndCommands() {
@@ -207,6 +253,55 @@ class OfficeViewController: NSViewController {
 
         let animationCommand = animationCommands.removeFirst()
         
+        if let command = animationCommand as? String {
+            if (command == "all turn") {
+                for personView in jankenPeople {
+                    if (personView.isEqual(mePerson!)) {
+                        continue
+                    }
+                    personView.showJanken(symbol: .None)
+                    personView.turnTo(otherPerson: mePerson!, completionHandler: { 
+
+                    })
+                }
+            }
+        }
+
+        if let jankenCommand = animationCommand as? (player: PersonView, symbol: Int) {
+
+            switch jankenCommand.symbol {
+            case -1:
+                for personView in jankenPeople {
+                    personView.showJanken(symbol: .PalmUp)
+                }
+            case -2:
+                for personView in jankenPeople {
+                    personView.showJanken(symbol: .PalmUp)
+                }
+                mePerson!.showJanken(symbol: .Paper)
+                Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { (timer) in
+                    self.executeAnimationCommands()
+                })
+                return
+            default:
+                var symbols: [HandSymbol] = [.Paper, .Scissors, .Stone]
+
+                var symbolIndex = jankenCommand.symbol
+
+                for personView in jankenPeople {
+                    personView.showJanken(symbol: symbols[symbolIndex%3])
+                    symbolIndex += 1
+                }
+            }
+
+            Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { (timer) in
+                for personView in self.jankenPeople {
+                    personView.showJanken(symbol: .None)
+                }
+                self.executeAnimationCommands()
+            })
+        }
+
         if let waitCommand = animationCommand as? Double {
             Timer.scheduledTimer(withTimeInterval: waitCommand, repeats: false, block: { (timer) in
                 self.executeAnimationCommands()

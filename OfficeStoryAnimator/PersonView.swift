@@ -9,18 +9,18 @@
 import Foundation
 import Cocoa
 
+enum HandSymbol: String {
+    case PalmUp = "PalmUp"
+    case Paper = "Paper"
+    case Scissors = "Scissors"
+    case Stone = "Stone"
+    case None
+}
+
 class PersonView: NSView {
     var completionHandler: (()->Void)?
     var imageView: NSImageView
     var handView: NSImageView?
-
-    enum HandSymbol: String {
-        case PalmUp = "PalmUp"
-        case Paper = "Paper"
-        case Scissors = "Scissors"
-        case Stone = "Stone"
-        case None
-    }
 
     init(frame frameRect: NSRect, direction: CGFloat, isVIP: Bool) {
         imageView = NSImageView(frame: NSRect(x: 0, y: 0, width: frameRect.width, height: frameRect.height))
