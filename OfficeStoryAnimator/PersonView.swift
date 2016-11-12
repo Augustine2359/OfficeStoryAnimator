@@ -14,6 +14,14 @@ class PersonView: NSView {
     var imageView: NSImageView
     var handView: NSImageView?
 
+    enum HandSymbol: String {
+        case PalmUp = "PalmUp"
+        case Paper = "Paper"
+        case Scissors = "Scissors"
+        case Stone = "Stone"
+        case None
+    }
+
     init(frame frameRect: NSRect, direction: CGFloat, isVIP: Bool) {
         imageView = NSImageView(frame: NSRect(x: 0, y: 0, width: frameRect.width, height: frameRect.height))
         imageView.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
@@ -21,6 +29,7 @@ class PersonView: NSView {
 
         handView = NSImageView(frame: NSRect(x: frameRect.width - 10, y: 0, width: frameRect.width, height: frameRect.height))
         handView!.image = Bundle.main.image(forResource: "PalmUp.png")
+        handView!.alphaValue = 0
 
         super.init(frame: frameRect)
         addSubview(imageView)
@@ -38,6 +47,16 @@ class PersonView: NSView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func showJanken(symbol: HandSymbol) {
+        switch symbol {
+        case .PalmUp, .Paper, .Scissors, .Stone:
+            handView!.image = Bundle.main.image(forResource: symbol.rawValue)
+            handView!.alphaValue = 1
+        default:
+            handView!.alphaValue = 0
+        }
     }
 
     func turnTo(otherPerson: PersonView, completionHandler: @escaping (()->Void)) {

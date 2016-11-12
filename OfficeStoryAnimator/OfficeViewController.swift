@@ -48,11 +48,12 @@ class OfficeViewController: NSViewController {
     }
 
     func randomDecisionViewsAndCommands() {
-        jankenPersonViews(fromX: 400, y: 200)
+        jankenPersonViews(fromX: 400, y: 0)
 
         let subView = NSView(frame: NSRect(x: 0, y: 0, width: 1500, height: 1500))
 
         for personView in jankenPeople {
+            personView.showJanken(symbol: .Stone)
             subView.addSubview(personView)
         }
 
