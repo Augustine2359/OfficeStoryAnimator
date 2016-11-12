@@ -30,18 +30,24 @@ class OfficeViewController: NSViewController {
     
     var animationCommands: [Any] = []
     
+    var scrollView: NSScrollView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let scrollView = NSScrollView(frame: NSRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-        scrollView.autoresizingMask = [.viewHeightSizable, .viewWidthSizable]
-        scrollView.hasHorizontalScroller = true
-        view.addSubview(scrollView)
+        scrollView = NSScrollView(frame: NSRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        scrollView!.autoresizingMask = [.viewHeightSizable, .viewWidthSizable]
+        scrollView!.hasHorizontalScroller = true
+        view.addSubview(scrollView!)
 
+        officeStoryViewsAndCommands()
+    }
+
+    func officeStoryViewsAndCommands() {
         let tableGroup1Rects = groupOfTableRectsFromXAndY(x: tableGroup1x, y: tableGroup1y)
         let tableGroup2Rects = groupOfTableRectsFromXAndY(x: tableGroup1x + 400, y: tableGroup1y)
         let tableGroup3Rects = groupOfTableRectsFromXAndY(x: tableGroup1x + 800, y: tableGroup1y)
-
+        
         let subView = NSView(frame: NSRect(x: 0, y: 0, width: 1500, height: 1500))
         for rect in tableGroup1Rects {
             let tableView = TableView(frame: rect)
@@ -55,17 +61,17 @@ class OfficeViewController: NSViewController {
             let tableView = TableView(frame: rect)
             subView.addSubview(tableView)
         }
-
+        
         var persons = personViews(fromX: 25, y: tableGroup1y, hasVIPs: false)
         for personView in persons {
             subView.addSubview(personView)
         }
-
+        
         persons = personViews(fromX: 425, y: tableGroup1y, hasVIPs: true)
         for personView in persons {
             subView.addSubview(personView)
         }
-
+        
         persons = personViews(fromX: 825, y: tableGroup1y, hasVIPs: false)
         for personView in persons {
             subView.addSubview(personView)
@@ -75,7 +81,7 @@ class OfficeViewController: NSViewController {
         ghostMePerson?.alphaValue = 0
         subView.addSubview(ghostMePerson!)
         
-        scrollView.documentView = subView
+        scrollView!.documentView = subView
         
         var waitDuration:Double = 5
         animationCommands.append(waitDuration)
@@ -129,7 +135,7 @@ class OfficeViewController: NSViewController {
         animationCommands.append(textTuple)
         textTuple = (speaker: pmPerson!, text: "Walk the other way around")
         animationCommands.append(textTuple)
-
+        
         
         translateTuple = (personView: ghostMePerson!, translation: NSPoint(x: -100, y: 0))
         animationCommands.append(translateTuple)
@@ -149,10 +155,10 @@ class OfficeViewController: NSViewController {
         animationCommands.append(rotateToPersonTuple)
         waitDuration = 2
         animationCommands.append(waitDuration)
-
+        
         textTuple = (speaker: pmPerson!, text: "Like that")
         animationCommands.append(textTuple)
-
+        
         rotateToPersonTuple = (turningPersonView: mePerson!, targetPersonView: deptHeadPerson!)
         animationCommands.append(rotateToPersonTuple)
         waitDuration = 2
@@ -174,7 +180,7 @@ class OfficeViewController: NSViewController {
         textTuple = (speaker: mePerson!, text: "...Ok")
         animationCommands.append(textTuple)
     }
-
+    
     func executeAnimationCommands() {
         if (animationCommands.count == 0) {
             return
