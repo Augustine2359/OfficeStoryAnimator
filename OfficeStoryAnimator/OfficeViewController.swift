@@ -15,8 +15,8 @@ class OfficeViewController: NSViewController {
     let standardTableWidth: Double = 75
     let standardTableHeight: Double = 75
 
-    let standardPersonWidth: Double = 75
-    let standardPersonHeight: Double = 75
+    let standardPersonWidth: Double = 110
+    let standardPersonHeight: Double = 110
 
     let facingUpAngle:CGFloat = 90
     let facingLeftAngle:CGFloat = 180
@@ -30,6 +30,8 @@ class OfficeViewController: NSViewController {
     
     var animationCommands: [Any] = []
     
+    var jankenPeople: [PersonView] = []
+
     var scrollView: NSScrollView?
     
     override func viewDidLoad() {
@@ -40,7 +42,21 @@ class OfficeViewController: NSViewController {
         scrollView!.hasHorizontalScroller = true
         view.addSubview(scrollView!)
 
-        officeStoryViewsAndCommands()
+        randomDecisionViewsAndCommands()
+
+//        officeStoryViewsAndCommands()
+    }
+
+    func randomDecisionViewsAndCommands() {
+        jankenPersonViews(fromX: 400, y: 200)
+
+        let subView = NSView(frame: NSRect(x: 0, y: 0, width: 1500, height: 1500))
+
+        for personView in jankenPeople {
+            subView.addSubview(personView)
+        }
+
+        scrollView?.documentView = subView
     }
 
     func officeStoryViewsAndCommands() {
@@ -284,6 +300,36 @@ class OfficeViewController: NSViewController {
         tableGroupRects.append(NSRect(x: x, y: y + standardTableHeight*5, width: 2*standardTableWidth, height: standardTableHeight))
         
         return tableGroupRects
+    }
+
+    func jankenPersonViews(fromX x:Double, y:Double) {
+        var personViewRect = NSRect(x: x, y: y, width: standardPersonWidth, height: standardPersonHeight)
+        mePerson = PersonView(frame: personViewRect, direction: facingUpAngle, isVIP: true)
+        jankenPeople.append(mePerson!)
+
+        personViewRect.origin.x += CGFloat(2 * standardPersonWidth)
+        jankenPeople.append(PersonView(frame: personViewRect, direction: facingUpAngle, isVIP: false))
+
+        personViewRect.origin.x += CGFloat(2 * standardPersonWidth)
+        personViewRect.origin.y += CGFloat(2 * standardPersonWidth)
+        jankenPeople.append(PersonView(frame: personViewRect, direction: facingLeftAngle, isVIP: false))
+
+        personViewRect.origin.y += CGFloat(2 * standardPersonWidth)
+        jankenPeople.append(PersonView(frame: personViewRect, direction: facingLeftAngle, isVIP: false))
+
+        personViewRect.origin.x -= CGFloat(2 * standardPersonWidth)
+        personViewRect.origin.y += CGFloat(2 * standardPersonWidth)
+        jankenPeople.append(PersonView(frame: personViewRect, direction: facingDownAngle, isVIP: false))
+
+        personViewRect.origin.x -= CGFloat(2 * standardPersonWidth)
+        jankenPeople.append(PersonView(frame: personViewRect, direction: facingDownAngle, isVIP: false))
+
+        personViewRect.origin.x -= CGFloat(2 * standardPersonWidth)
+        personViewRect.origin.y -= CGFloat(2 * standardPersonWidth)
+        jankenPeople.append(PersonView(frame: personViewRect, direction: facingRightAngle, isVIP: false))
+
+        personViewRect.origin.y -= CGFloat(2 * standardPersonWidth)
+        jankenPeople.append(PersonView(frame: personViewRect, direction: facingRightAngle, isVIP: false))
     }
     
     func personViews(fromX x:Double, y:Double, hasVIPs:Bool) -> [PersonView] {

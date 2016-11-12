@@ -12,13 +12,19 @@ import Cocoa
 class PersonView: NSView {
     var completionHandler: (()->Void)?
     var imageView: NSImageView
+    var handView: NSImageView?
 
     init(frame frameRect: NSRect, direction: CGFloat, isVIP: Bool) {
         imageView = NSImageView(frame: NSRect(x: 0, y: 0, width: frameRect.width, height: frameRect.height))
         imageView.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
         imageView.image = isVIP ? Bundle.main.image(forResource: "vip.png") : Bundle.main.image(forResource: "person.png")
+
+        handView = NSImageView(frame: NSRect(x: frameRect.width - 10, y: 0, width: frameRect.width, height: frameRect.height))
+        handView!.image = Bundle.main.image(forResource: "PalmUp.png")
+
         super.init(frame: frameRect)
         addSubview(imageView)
+        imageView.addSubview(handView!)
         imageView.frameCenterRotation = direction
     }
     
@@ -55,6 +61,7 @@ class PersonView: NSView {
 
     override func draw(_ dirtyRect: NSRect) {
         layer?.masksToBounds = false
+        imageView.layer?.masksToBounds = false
         super.draw(dirtyRect)
     }
 }

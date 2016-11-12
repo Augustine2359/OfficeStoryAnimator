@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D2C90BF1DD7767B00A3294A /* PalmUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2C90BB1DD7767B00A3294A /* PalmUp.png */; };
+		3D2C90C01DD7767B00A3294A /* Paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2C90BC1DD7767B00A3294A /* Paper.png */; };
+		3D2C90C11DD7767B00A3294A /* Scissors.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2C90BD1DD7767B00A3294A /* Scissors.png */; };
+		3D2C90C21DD7767B00A3294A /* Stone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2C90BE1DD7767B00A3294A /* Stone.png */; };
 		3D8875541DC8C68C000E688C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8875531DC8C68C000E688C /* AppDelegate.swift */; };
 		3D8875561DC8C68C000E688C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D8875551DC8C68C000E688C /* Assets.xcassets */; };
 		3D8875591DC8C68C000E688C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D8875571DC8C68C000E688C /* MainMenu.xib */; };
@@ -21,6 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D2C90BB1DD7767B00A3294A /* PalmUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PalmUp.png; sourceTree = "<group>"; };
+		3D2C90BC1DD7767B00A3294A /* Paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Paper.png; sourceTree = "<group>"; };
+		3D2C90BD1DD7767B00A3294A /* Scissors.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Scissors.png; sourceTree = "<group>"; };
+		3D2C90BE1DD7767B00A3294A /* Stone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stone.png; sourceTree = "<group>"; };
 		3D8875501DC8C68C000E688C /* OfficeStoryAnimator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OfficeStoryAnimator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D8875531DC8C68C000E688C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3D8875551DC8C68C000E688C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -75,6 +83,10 @@
 				3D8875721DC8D087000E688C /* PersonView.swift */,
 				3D8875741DC8D805000E688C /* person.png */,
 				3D8875761DCCE3C7000E688C /* vip.png */,
+				3D2C90BB1DD7767B00A3294A /* PalmUp.png */,
+				3D2C90BC1DD7767B00A3294A /* Paper.png */,
+				3D2C90BD1DD7767B00A3294A /* Scissors.png */,
+				3D2C90BE1DD7767B00A3294A /* Stone.png */,
 				3D8875551DC8C68C000E688C /* Assets.xcassets */,
 				3D8875571DC8C68C000E688C /* MainMenu.xib */,
 				3D88755A1DC8C68C000E688C /* Info.plist */,
@@ -141,11 +153,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D2C90C11DD7767B00A3294A /* Scissors.png in Resources */,
+				3D2C90BF1DD7767B00A3294A /* PalmUp.png in Resources */,
 				3D8875751DC8D805000E688C /* person.png in Resources */,
 				3D8875561DC8C68C000E688C /* Assets.xcassets in Resources */,
 				3D8875771DCCE3C7000E688C /* vip.png in Resources */,
 				3D88756D1DC8CC45000E688C /* OfficeView.xib in Resources */,
+				3D2C90C01DD7767B00A3294A /* Paper.png in Resources */,
 				3D8875591DC8C68C000E688C /* MainMenu.xib in Resources */,
+				3D2C90C21DD7767B00A3294A /* Stone.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
