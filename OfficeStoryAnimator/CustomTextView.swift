@@ -10,6 +10,21 @@ import Foundation
 import Cocoa
 
 class CustomTextView: NSTextView {
+    init(shouter: PersonView, text: String) {
+        var frame = shouter.frame
+        frame.size.width *= 2
+        frame.origin.x += 50
+        super.init(frame: frame)
+        font = NSFont(name: font!.fontName, size: 140)
+        string = text
+        
+        layoutManager?.ensureLayout(for: textContainer!)
+        let usedRect = layoutManager?.usedRect(for: textContainer!)
+        frame.size.width = usedRect!.width
+        frame.size.height = usedRect!.height
+        self.frame = frame
+    }
+    
     init(speaker: PersonView, text: String) {
         var frame = speaker.frame
         frame.size.width *= 2

@@ -48,7 +48,7 @@ class OfficeViewController: NSViewController {
     }
 
     func randomDecisionViewsAndCommands() {
-        jankenPersonViews(fromX: 400, y: 0)
+        jankenPersonViews(fromX: 400, y: 10)
 
         let subView = NSView(frame: NSRect(x: 0, y: 0, width: 1500, height: 1500))
 
@@ -58,12 +58,19 @@ class OfficeViewController: NSViewController {
 
         scrollView?.documentView = subView
 
+        ghostMePerson = PersonView(frame: NSRect(x: 50, y: 310, width: 500, height: 500), direction: facingRightAngle, isVIP: true)
+        ghostMePerson?.alphaValue = 0
+        subView.addSubview(ghostMePerson!)
+
+        var waitDuration:Double = 10
+        animationCommands.append(waitDuration)
+
         var textTuple = (speaker: jankenPeople[2], text: "Ok guys, we need to decide who has to stay back today.")
         animationCommands.append(textTuple)
         textTuple = (speaker: jankenPeople[6], text: "Let's decide using janken.")
         animationCommands.append(textTuple)
 
-        textTuple = (speaker: mePerson!, text: "JAN KEN PON")
+        textTuple = (speaker: ghostMePerson!, text: "JAN KEN PON")
         animationCommands.append(textTuple)
 
         var jankenTuple = (player: mePerson!, symbol: 0)
@@ -71,7 +78,7 @@ class OfficeViewController: NSViewController {
         textTuple = (speaker: jankenPeople[3], text: "Let's try again.")
         animationCommands.append(textTuple)
 
-        textTuple = (speaker: mePerson!, text: "JAN KEN PON")
+        textTuple = (speaker: ghostMePerson!, text: "JAN KEN PON")
         animationCommands.append(textTuple)
 
         jankenTuple = (player: mePerson!, symbol: 1)
@@ -79,7 +86,7 @@ class OfficeViewController: NSViewController {
         textTuple = (speaker: jankenPeople[7], text: "Still can't decide.")
         animationCommands.append(textTuple)
 
-        textTuple = (speaker: mePerson!, text: "JAN KEN PON")
+        textTuple = (speaker: ghostMePerson!, text: "JAN KEN PON")
         animationCommands.append(textTuple)
 
         jankenTuple = (player: mePerson!, symbol: 2)
@@ -88,16 +95,25 @@ class OfficeViewController: NSViewController {
         textTuple = (speaker: mePerson!, text: "Oh I have a suggestion. We have another way to do it in my country.")
         animationCommands.append(textTuple)
 
-        textTuple = (speaker: mePerson!, text: "2 minutes later.")
+        textTuple = (speaker: ghostMePerson!, text: "(2 minutes later...)")
         animationCommands.append(textTuple)
 
-        textTuple = (speaker: mePerson!, text: "O YA PE YA SONG.")
+        textTuple = (speaker: mePerson!, text: "Everyone got it?")
+        animationCommands.append(textTuple)
+
+        textTuple = (speaker: jankenPeople[1], text: "Yup.")
+        animationCommands.append(textTuple)
+
+        textTuple = (speaker: jankenPeople[5], text: "Yup.")
+        animationCommands.append(textTuple)
+
+        textTuple = (speaker: ghostMePerson!, text: "O YA PE YA SONG.")
         animationCommands.append(textTuple)
 
         jankenTuple = (player: mePerson!, symbol: -1)
         animationCommands.append(jankenTuple)
 
-        textTuple = (speaker: mePerson!, text: "O YA PE YA SONG.")
+        textTuple = (speaker: ghostMePerson!, text: "O YA PE YA SONG.")
         animationCommands.append(textTuple)
 
         jankenTuple = (player: mePerson!, symbol: -2)
@@ -309,6 +325,17 @@ class OfficeViewController: NSViewController {
         }
         
         if let textCommand = animationCommand as? (speaker: PersonView, text: String) {
+            if textCommand.speaker.isEqual(ghostMePerson!) {
+                let textView = CustomTextView(shouter: textCommand.speaker, text: textCommand.text)
+                view.addSubview(textView)
+                Timer.scheduledTimer(withTimeInterval: 2.5, repeats: false, block: { (timer) in
+                    textView.removeFromSuperview()
+                    self.executeAnimationCommands()
+                })
+                
+                return
+            }
+            
             let textView = CustomTextView(speaker: textCommand.speaker, text: textCommand.text)
             view.addSubview(textView)
             Timer.scheduledTimer(withTimeInterval: 2.5, repeats: false, block: { (timer) in
